@@ -10,7 +10,7 @@ import javafx.event.ActionEvent;
 
 public class Controller {
 
-    // the memberVariable name must be the same as the fx:id in the todo.fxml
+    // the memberVariable name must be the same as the fx:id in the sample.fxml
     @FXML
     private TextField nameField;
     @FXML

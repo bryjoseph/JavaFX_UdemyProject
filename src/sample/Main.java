@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         // if wanting to execute the code below, comment out FXMLLoader.load()
-        Parent root = FXMLLoader.load(getClass().getResource("todo.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
         // the following code is replicating the fxml code
 //        GridPane root = new GridPane();
