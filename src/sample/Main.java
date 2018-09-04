@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         // if wanting to execute the code below, comment out FXMLLoader.load()
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("todo.fxml"));
 
         // the following code is replicating the fxml code
 //        GridPane root = new GridPane();
@@ -27,7 +27,7 @@ public class Main extends Application {
         // now window appears the same as before
 
         primaryStage.setTitle("Broj World Title");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 1000, 500));
 
         // add text within the scene (not Title)
 //      Label greeting = new Label("Welcome to JavaFX");

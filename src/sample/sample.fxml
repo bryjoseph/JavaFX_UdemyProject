@@ -1,14 +1,272 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.GridPane?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <Label text="Welcome to JavaFX bb!" textFill="green">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Accordion?>
+
+<GridPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="10" vgap="10" >
+
+    <!--Example Button for Event Listener (Button 1)-->
+    <Button fx:id="helloButton" GridPane.rowIndex="0" GridPane.columnIndex="0" text="Say Hello" onAction="#onButtonClicked">
+        <!--Adding an icon to the button-->
+        <graphic>
+            <ImageView>
+                <Image url="@/toolbarButtonGraphics/general/TipOfTheDay24.gif"/>
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" text="This is a label" textFill="blue" wrapText="true">
         <font>
-            <Font name="Time New Roman bold" size="20" />
+            <Font name="Arial italic" size="12"/>
         </font>
+        <!--Adding an icon to the button-->
+        <graphic>
+            <ImageView>
+                <Image url="@/toolbarButtonGraphics/general/Information24.gif"/>
+            </ImageView>
+        </graphic>
     </Label>
+
+    <!--Defining a ToggleGroup because ToggleGroup does not descend from Node also makes the RadioButtons work together-->
+    <fx:define>
+        <ToggleGroup fx:id="colorToggleGroup" />
+    </fx:define>
+    <!--toggleGroup is defined in fx:define ALSO selected makes the radio button selected on load-->
+    <RadioButton GridPane.rowIndex="0" GridPane.columnIndex="2" text="Red" toggleGroup="$colorToggleGroup" selected="true"/>
+    <RadioButton GridPane.rowIndex="0" GridPane.columnIndex="3" text="Blue" toggleGroup="$colorToggleGroup"/>
+    <RadioButton GridPane.rowIndex="0" GridPane.columnIndex="4" text="Green" toggleGroup="$colorToggleGroup"/>
+
+    <!--Checkboxes (indeterminate is a prop that has a dash first then allows check or no check - Weird-->
+    <CheckBox text="Subscribe to our newsletter" GridPane.rowIndex="0" GridPane.columnIndex="5" indeterminate="true" />
+
+    <!--Cannot Group Checkboxes like Radio Buttons, but you can group them in a new layout to achieve same effect-->
+    <VBox GridPane.rowIndex="1" GridPane.columnIndex="1">
+        <CheckBox text="Dog"/>
+        <CheckBox text="Cat"/>
+        <CheckBox text="Bird"/>
+    </VBox>
+
+    <fx:define>
+        <ToggleGroup fx:id="toggleButtonGroup" />
+    </fx:define>
+    <!--Example of Grouping ToggleButtons (A button that stays pressed until pressed again)-->
+    <HBox GridPane.rowIndex="1" GridPane.columnIndex="2">
+        <ToggleButton text="Toggle Me" toggleGroup="$toggleButtonGroup" selected="true"/>
+        <ToggleButton text="Toggle Me" toggleGroup="$toggleButtonGroup"/>
+        <ToggleButton text="Toggle Me" toggleGroup="$toggleButtonGroup"/>
+    </HBox>
+
+    <!--Text Field (associated TextField with the button push)-->
+    <TextField fx:id="nameField" GridPane.rowIndex="2" GridPane.columnIndex="0" onKeyReleased="#handleKeyReleased"/>
+    <!--Password Field w/ Text hidden for passwords-->
+    <PasswordField GridPane.rowIndex="2" GridPane.columnIndex="1" />
+    <!--ComboBox (editable true makes the entry editable WITHIN the comboBox)-->
+    <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="1" editable="true">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Option 1"/>
+                <String fx:value="Option 2"/>
+                <String fx:value="Option 3"/>
+                <String fx:value="Option 4"/>
+                <String fx:value="Option 5"/>
+            </FXCollections>
+        </items>
+        <!--Setting this <value> tag here default selects an option from the ComboBox-->
+        <value>
+            <String fx:value="Option 4"/>
+        </value>
+    </ComboBox>
+    <!--ChoiceBox (same as comboBox except the selection has a check next to selection)-->
+    <ChoiceBox GridPane.rowIndex="2" GridPane.columnIndex="3">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Choice 1"/>
+                <String fx:value="Choice 2"/>
+                <String fx:value="Choice 3"/>
+                <String fx:value="Choice 4"/>
+                <String fx:value="Choice 5"/>
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+    <!--Slider Control (can also be a vertical slider by setting orientation prop)-->
+    <Slider GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="4"
+            min="0" max="100"
+            showTickLabels="true"
+            showTickMarks="true"
+            minorTickCount="4"
+            snapToTicks="true"/>
+
+    <!--Spinner Control (editable allows user to type in spinner space (CAN actually pick number too large spinner crashes))-->
+    <Spinner GridPane.rowIndex="3" GridPane.columnIndex="4" min="0" max="100" editable="true" initialValue="50"/>
+
+    <!--Color Picker Control-->
+    <ColorPicker GridPane.rowIndex="4" GridPane.columnIndex="0" />
+
+    <!--Date Picker Control-->
+    <DatePicker GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <!--TitledPane (not a layout) Control Inside an Accordion Group (Adding the fx:id to one pane, the expandedPane prop will start open)-->
+    <Accordion GridPane.rowIndex="4" GridPane.columnIndex="2" GridPane.columnSpan="2" expandedPane="$tp1">
+        <panes>
+            <TitledPane fx:id="tp1" text="Titled Pane Number 1">
+                <Label text="Label1 inside of Titled Pane 1" />
+            </TitledPane>
+            <TitledPane text="Titled Pane Number 2">
+                <Label text="Label2 inside of Titled Pane 2" />
+            </TitledPane>
+            <TitledPane text="Titled Pane Number 3">
+                <Label text="Label3 inside of Titled Pane 3" />
+            </TitledPane>
+        </panes>
+    </Accordion>
+
+    <!--Another button example for EventListening (Button 2)-->
+    <Button fx:id="byeButton" text="Say Bye" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#onButtonClicked"/>
+    <!--CheckBox example tied to eventListener-->
+    <CheckBox fx:id="checkBox" text="Clear the text field after hello or goodbye"
+              GridPane.rowIndex="5"
+              GridPane.columnIndex="1"
+              GridPane.columnSpan="2"
+            onAction="#handleChange"/>
+    <Label fx:id="ourLabel" text="Nothing has happened" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
 </GridPane>
+
+<!--Using StackPane instead of TilePane-->
+<!--Using TilePane instead of FlowPane-->
+<!--Using FlowPane instead of GridPane-->
+<!--Using BorderPane instead of HBox-->
+<!--Using HBox instead of GridPane-->
+<!--<StackPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml">-->
+    <!--<Label text="Another Label Text" style="-fx-background-color: blue"/>-->
+    <!--<Button text="Button One" style="-fx-background-color: red"/>-->
+    <!--<Label text="The Label Text" style="-fx-background-color: green"/>-->
+<!--</StackPane>-->
+
+<!--<TilePane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" orientation="HORIZONTAL">-->
+    <!--<Button text="Button 0"/>-->
+    <!--<Button text="Button 1"/>-->
+    <!--<Button text="Button 2"/>-->
+    <!--<Button text="Button 3"/>-->
+    <!--<Button text="Button 4"/>-->
+    <!--<Button text="Button 5"/>-->
+    <!--<Button text="Button 6"/>-->
+    <!--<Button text="Button 7"/>-->
+    <!--<Button text="Button 8"/>-->
+    <!--<Button text="Button 9"/>-->
+<!--</TilePane>-->
+
+
+
+<!--<FlowPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" orientation="VERTICAL">-->
+    <!--<Button text="Button 0"/>-->
+    <!--<Button text="Button 1"/>-->
+    <!--<Button text="Button 2"/>-->
+    <!--<Button text="Button 3"/>-->
+    <!--<Button text="Button 4"/>-->
+    <!--<Button text="Button 5"/>-->
+    <!--<Button text="Button 6"/>-->
+    <!--<Button text="Button 7"/>-->
+    <!--<Button text="Button 8"/>-->
+    <!--<Button text="Button 9"/>-->
+<!--</FlowPane>-->
+
+
+
+<!--<BorderPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml">-->
+    <!--<top>-->
+        <!--&lt;!&ndash;The alignment=CENTER does not center in the top child because the program defaults the size of the control to the size of the text&ndash;&gt;-->
+        <!--<Label text="This Label is in Top Position" alignment="CENTER" BorderPane.alignment="CENTER"-->
+                <!--style="-fx-border-color: blue;-->
+                <!-- -fx-border-width: 3;-->
+                <!-- -fx-border-style: dashed" />-->
+    <!--</top>-->
+    <!--<left>-->
+        <!--<Label text="This Label is in the left position" alignment="CENTER"/>-->
+    <!--</left>-->
+    <!--<right>-->
+        <!--<Label text="This Label is in the right position" alignment="CENTER" />-->
+    <!--</right>-->
+    <!--<center>-->
+        <!--<Label text="This is long text to see what happens when there isn't enough space for this amount of text" alignment="CENTER"/>-->
+    <!--</center>-->
+    <!--<bottom>-->
+        <!--<HBox spacing="10" alignment="BOTTOM_RIGHT">-->
+            <!--<padding>-->
+                <!--<Insets bottom="10" right="10"/>-->
+            <!--</padding>-->
+            <!--<Button text="Button One" prefWidth="90"/>-->
+            <!--<Button text="Button Two" prefWidth="90"/>-->
+            <!--<Button text="Button Three" prefWidth="90"/>-->
+        <!--</HBox>-->
+    <!--</bottom>-->
+
+<!--<HBox HBox example left here // Adding an inline CSS style for border for the HBox
+        style="-fx-border-color: red;-->
+        <!-- -fx-border-width: 3;-->
+        <!-- -fx-border-style: dashed"-->
+        <!--spacing="10">-->
+    <!--<padding>-->
+        <!--<Insets bottom="10" right="10"/>-->
+    <!--</padding>-->
+<!--</HBox>-->
+<!--</BorderPane>-->
+
+
+<!--<GridPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" alignment="top_center" hgap="10" vgap="10" gridLinesVisible="true">-->
+    <!---->
+    <!--&lt;!&ndash;Adding padding between the top of the GridPane and the Top of the window&ndash;&gt;-->
+    <!--<padding>-->
+        <!--<Insets top="10"/>-->
+    <!--</padding>-->
+
+
+    <!--Messing with the column constraints of the GridPane-->
+    <!--<columnConstraints>-->
+        <!--&lt;!&ndash;can use pixels or percentage&ndash;&gt;-->
+        <!--<ColumnConstraints percentWidth="50.0"/>-->
+        <!--<ColumnConstraints percentWidth="50.0"/>-->
+    <!--</columnConstraints>-->
+
+
+    <!--Adding a Label to the GridPane (text box)-->
+    <!--<Label text="Welcome to JavaFX bb!" textFill="green">-->
+        <!--<font>-->
+            <!--<Font name="Time New Roman bold" size="20" />-->
+        <!--</font>-->
+    <!--</Label>-->
+
+
+    <!--Adding a bunch of buttons with positioning and halignment properties-->
+    <!--<Button text="Button One" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="RIGHT"/>-->
+    <!--<Button text="Button Two" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT"/>-->
+    <!--<Button text="Button Three" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.halignment="CENTER"/>-->
+    <!--<Button text="Button Four Really Long Text Here Button Even More Text To Make This Huge" GridPane.rowIndex="1" GridPane.columnIndex="1"/>-->
+    <!--<Button text="Button Four Really Long Text" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>-->
+    <!--<Button text="Button Five" GridPane.rowIndex="2" GridPane.columnIndex="0"/>-->
+<!--</GridPane>-->
