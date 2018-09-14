@@ -1,0 +1,13 @@
+/*.button selector*/
+.button {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+/*using an id prop to style a button*/
+#oneBlueButton {
+    -fx-background-color: blue;
+        -fx-text-fill: white;
+}
+
+/* Styling A Theme */

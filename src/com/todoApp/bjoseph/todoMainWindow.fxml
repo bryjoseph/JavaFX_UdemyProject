@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<!--Adding a CSS style sheet to control the Button selector-->
+<?import javafx.scene.web.WebView?>
+<BorderPane fx:id="mainBorderPane" fx:controller="com.todoApp.bjoseph.Controller" xmlns:fx="http://javafx.com/fxml" stylesheets="@mainstyles.css">
+    <top>
+        <!--Organization goes, BorderPane, top, VBox, MenuBar and ToolBar-->
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New Todo Item" onAction="#showNewItemDialog"/>
+                        <SeparatorMenuItem />
+                        <!--This is a test file open -->
+                        <MenuItem text="Open A File" onAction="#handleOpenClick" />
+                        <SeparatorMenuItem />
+                        <MenuItem text="Exit" onAction="#handleExit"/>
+                    </items>
+                </Menu>
+            </MenuBar>
+            <!--Adding ToolBar-->
+            <ToolBar>
+                <HBox>
+                    <!--Using an icon instead of text for button (added toolTip (Ahh! It was a bug))-->
+                    <Button onAction="#showNewItemDialog">
+                        <!--to make toolTip work, must use the prop <tooltip> with a class instance <Tooltip>-->
+                        <tooltip>
+                            <Tooltip text="Add a New Todo Item" />
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/New24.gif" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <!--Adding Toggle Button to filter the results-->
+                    <ToggleButton fx:id="filterToggleButton" text="Today's Items" onAction="#handleFilterButton">
+                        <tooltip>
+                            <Tooltip text="Filter on today's items only" />
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/Find24.gif" />
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
+                    <!--Using id: not fx:id for CSS style sheet-->
+                    <Button fx:id="testButton" id="oneBlueButton" text="Test Button">
+                        <tooltip>
+                            <Tooltip text="This is just a test button" />
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/FindAgain24.gif" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <!--Including a Hyperlink for testing (3 states unvisited, visited, clicked) ALSO does not have to navigate to web-->
+                    <Hyperlink text="www.javafx.com" onAction="#handleLinkClick"/>
+                </HBox>
+            </ToolBar>
+        </VBox>
+    </top>
+    <left>
+        <ListView fx:id="todoListView" onKeyPressed="#handleKeyPressed">
+        </ListView>
+    </left>
+    <center>
+        <VBox style="-fx-background-color: white">
+            <!--Testing Purposes ONLY-->
+            <!--<WebView fx:id="webView" /> -->
+            <!--Testing Purposes ONLY-->
+            <!--This Label is for testing only-->
+            <!--<Label fx:id="testLabel" text="JavaFx Effects" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" rotate="90"/>-->
+            <TextArea fx:id="todoItemDetails" VBox.vgrow="ALWAYS" wrapText="true"/>
+            <HBox>
+                <Label text="Due Date: " style="-fx-background-color: white">
+                    <font>
+                        <Font name="Times New Roman bold" size="16" />
+                    </font>
+                </Label>
+                <Label fx:id="deadlineLabel" style="-fx-background-color: white">
+                    <font>
+                        <Font name="Times New Roman bold" size="16" />
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

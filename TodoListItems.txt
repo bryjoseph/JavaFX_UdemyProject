@@ -1,0 +1,9 @@
+Start Java Lessons	Sit down at personal computer and watch/code Udemy Java lessons	05-09-2018
+Apply To Back-End Jobs	Look into Denver Tech Center software development jobs	01-10-2018
+Conduct Phone Interview	After finding a place, practice and conduct a phone interview for a software engineer position	01-11-2018
+Interview In Person	Once the phone interview is aced, meet the office in person	05-11-2018
+Review Offer Letter	After acing the phone interview and the in-person interview, review offer letter and make decision	10-11-2018
+Accept New Offer Letter	Read the fine print from the letter and decide to accept and move forward in life.	16-11-2018
+This Is A Test Todo	This TodoItem is due today!	10-09-2018
+Test Item Due Tomorrow	This TodoItem is due Tomorrow freak!	11-09-2018
+Today's Todo Item	Due Today and should pass the filter	12-09-2018
